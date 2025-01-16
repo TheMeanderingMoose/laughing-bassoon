@@ -3,8 +3,11 @@ import asyncio
 
 # internal
 from src.api.models import Query, Response
+from src.globals.environment import Environment
 
 async def send_message(query: Query) -> Response:
+
+    environment = Environment()
 
     host = '194.195.212.204'
     port = 1234
@@ -12,7 +15,7 @@ async def send_message(query: Query) -> Response:
     reader, writer = await asyncio.open_connection(host, port)
     
     try:
-        ititialization_message = "SUk2VzeJBjwy9fcC3p5hWmv"
+        ititialization_message = str(environment.KEY)
         print(f"Sending message: {ititialization_message}")
         writer.write(message.encode('utf-8'))
         await writer.drain()
